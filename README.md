@@ -1,6 +1,6 @@
 # OurDB
 
-OurDB is a small, fast database client for macOS. It shows your data as a table, and you can edit it in place. It is one native Rust app (about 25 MB) with no Electron and no Java.
+OurDB is a small, fast database client for macOS. It shows your data as a table, and you can edit it in place. It is one native Rust app (a 22 MB download) with no Electron and no Java.
 
 Supported databases: **PostgreSQL, MySQL, SQLite, MongoDB, Amazon DocumentDB**.
 
@@ -8,18 +8,35 @@ The design rules are in [SPEC.md](SPEC.md).
 
 ## Install
 
-You need Rust one time to build the app.
+1. Download **[OurDB.dmg](https://github.com/xuanngoc/ourDBs/releases/latest/download/OurDB.dmg)** (Apple Silicon and Intel, macOS 11 or later).
+2. Open it and drag **OurDB** to **Applications**.
+3. Open OurDB. The first time, macOS blocks it, because the app is not notarized by Apple:
+   1. Click **Done** (do not move it to the Trash).
+   2. Open **System Settings → Privacy & Security**.
+   3. Next to "OurDB was blocked", click **Open Anyway**, then confirm.
+
+   Or run one command in Terminal: `xattr -dr com.apple.quarantine /Applications/OurDB.app`
+
+### Build from source
+
+You need Rust one time.
 
 ```sh
 brew install rustup && rustup default stable   # skip if you already have Rust
 ./scripts/install.sh                           # builds OurDB.app and copies it to /Applications
 ```
 
-Other options:
-
-- `./scripts/bundle-macos.sh` makes `dist/OurDB.app` only.
-- `./scripts/bundle-macos.sh --dmg` also makes `dist/OurDB.dmg`, which you can give to other people. The app has an ad-hoc signature only. On another Mac, right-click → Open the first time.
+- `./scripts/bundle-macos.sh` makes `dist/OurDB.app`.
+- `./scripts/bundle-macos.sh --universal --dmg` makes a universal app (Apple Silicon + Intel) and `dist/OurDB.dmg`. It needs `rustup target add x86_64-apple-darwin` one time.
 - `cargo run -p ourdb` starts the app from the source folder.
+
+### Publish a release
+
+Push a version tag. GitHub Actions (`.github/workflows/release.yml`) builds the universal DMG and attaches it to a GitHub Release, so the download link above always gets the newest version.
+
+```sh
+git tag v0.1.0 && git push origin v0.1.0
+```
 
 ## Use
 
@@ -101,7 +118,6 @@ crates/app       The `ourdb` binary
 - No schema editor, import, dump/restore or autocomplete.
 - Edits need a primary key (`_id` for documents). Tables without one are read-only.
 - A table tab exports only the page on screen. Use a query tab to export more rows (up to 10,000).
-- The build is for Apple Silicon (arm64) only.
 - PostgreSQL and MySQL use macOS native TLS: TLS 1.2 at most. With TLS **Prefer**, PostgreSQL does not fall back to plain TCP after a failed TLS handshake. MySQL **Verify** fails with certificates that MySQL makes itself, because macOS refuses certificates valid for more than 825 days (use **Require** or a real CA).
 - MongoDB filters do not accept regex literals (`/abc/i`). Use `{$regex: "abc", $options: "i"}`.
 - In a wide table, the vertical scrollbar is at the right end of the table. Scroll with the trackpad or mouse wheel.
