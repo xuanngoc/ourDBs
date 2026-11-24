@@ -1,0 +1,16 @@
+[package]
+name = "ourdb"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+anyhow = "1.0.105"
+ourdb-core = { version = "0.1.0", path = "../core" }
+ourdb-mongo = { version = "0.1.0", path = "../mongo" }
+ourdb-mysql = { version = "0.1.0", path = "../mysql" }
+ourdb-postgres = { version = "0.1.0", path = "../postgres" }
+ourdb-sqlite = { version = "0.1.0", path = "../sqlite" }
+ourdb-ui = { version = "0.1.0", path = "../ui" }
+tokio = { version = "1.54.1", features = ["rt-multi-thread", "sync"] }

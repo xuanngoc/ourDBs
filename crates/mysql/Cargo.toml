@@ -1,0 +1,16 @@
+[package]
+name = "ourdb-mysql"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+anyhow = "1.0.105"
+async-trait = "0.1.92"
+mysql_async = { version = "0.37.1", default-features = false, features = ["native-tls-tls", "minimal"] }
+ourdb-core = { version = "0.1.0", path = "../core" }
+tokio = { version = "1.54.1", features = ["rt", "sync", "macros", "time"] }
+
+[dev-dependencies]
+tokio = { version = "1.54.1", features = ["rt-multi-thread", "macros", "net", "io-util"] }

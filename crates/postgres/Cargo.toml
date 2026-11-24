@@ -1,0 +1,19 @@
+[package]
+name = "ourdb-postgres"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+anyhow = "1.0.105"
+async-trait = "0.1.92"
+futures-util = "0.3.34"
+native-tls = "0.2.18"
+ourdb-core = { version = "0.1.0", path = "../core" }
+postgres-native-tls = "0.5.3"
+tokio = { version = "1.54.1", features = ["rt", "sync", "macros", "time"] }
+tokio-postgres = "0.7.18"
+
+[dev-dependencies]
+tokio = { version = "1.54.1", features = ["rt-multi-thread", "macros"] }

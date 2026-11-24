@@ -1,0 +1,26 @@
+# Test databases for OurDB development. Uses images that are common on dev machines.
+# Start: docker compose -f dev/compose.yml up -d
+# Stop:  docker compose -f dev/compose.yml down -v
+name: ourdb-dev
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: ourdb
+      POSTGRES_PASSWORD: ourdb
+      POSTGRES_DB: ourdb
+    ports: ["55432:5432"]
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: ourdb
+      MYSQL_DATABASE: ourdb
+      MYSQL_USER: ourdb
+      MYSQL_PASSWORD: ourdb
+    ports: ["53306:3306"]
+  mongo:
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ourdb
+      MONGO_INITDB_ROOT_PASSWORD: ourdb
+    ports: ["57017:27017"]

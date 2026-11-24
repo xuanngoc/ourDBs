@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2F6FEB"/>
+      <stop offset="1" stop-color="#1A3F8F"/>
+    </linearGradient>
+  </defs>
+  <rect x="100" y="100" width="824" height="824" rx="185" fill="url(#bg)"/>
+  <!-- table card -->
+  <rect x="232" y="268" width="560" height="488" rx="44" fill="#FFFFFF"/>
+  <!-- header row -->
+  <path d="M232 312 a44 44 0 0 1 44 -44 h472 a44 44 0 0 1 44 44 v76 h-560 z" fill="#CFE0FF"/>
+  <!-- row lines -->
+  <rect x="232" y="388" width="560" height="6" fill="#9DB8EA"/>
+  <rect x="232" y="510" width="560" height="4" fill="#DCE6F7"/>
+  <rect x="232" y="632" width="560" height="4" fill="#DCE6F7"/>
+  <!-- column lines -->
+  <rect x="404" y="268" width="5" height="488" fill="#DCE6F7"/>
+  <rect x="598" y="268" width="5" height="488" fill="#DCE6F7"/>
+  <!-- highlighted (edited) cell -->
+  <rect x="409" y="514" width="189" height="118" fill="#FFE08A"/>
+</svg>
